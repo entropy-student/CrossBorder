@@ -1,8 +1,8 @@
 # Dependency Audit Triage
 
-`AUDIT_DATE=2026-09-05`  
-`COMMAND_PROD=corepack pnpm@10.11.1 audit --prod --json`  
-`COMMAND_ALL=corepack pnpm@10.11.1 audit --json`  
+`AUDIT_DATE=2026-09-05`
+`COMMAND_PROD=corepack pnpm@10.11.1 audit --prod --json`
+`COMMAND_ALL=corepack pnpm@10.11.1 audit --json`
 `AUTO_FIX=NO`
 
 Both commands completed with exit code `1` because advisories were found.
