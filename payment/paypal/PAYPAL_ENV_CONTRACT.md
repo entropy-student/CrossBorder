@@ -18,7 +18,6 @@ PAYPAL_CLIENT_ID=
 PAYPAL_CLIENT_SECRET=
 PAYPAL_API_BASE_URL=<SET_LOCALLY_FROM_OFFICIAL_DOCUMENTATION>
 PAYPAL_WEBHOOK_ID=
-PAYPAL_WEBHOOK_SECRET=
 PAYPAL_RETURN_URL=<SET_LOCALLY_TO_SAME_ORIGIN_CHECKOUT_RETURN>
 PAYPAL_CANCEL_URL=<SET_LOCALLY_TO_SAME_ORIGIN_CHECKOUT_CANCEL>
 PAYPAL_IDEMPOTENCY_HEADER=PayPal-Request-Id
@@ -36,6 +35,13 @@ the authorization operation.
 
 These names are a project-side contract, not a claim that every PayPal product
 uses identical field names. Confirm official names before implementation.
+
+`PAYPAL_STATIC_WEBHOOK_SECRET_REQUIRED=NO`. The first-path webhook seam uses
+`PAYPAL_WEBHOOK_ID`, PayPal transmission headers, the raw request body and the
+parsed event, with server-side cryptographic or PayPal verification. A static
+shared webhook secret is not part of this contract. `PAYPAL_WEBHOOK_ID` is
+required before any future customer exposure
+(`PAYPAL_WEBHOOK_ID_REQUIRED_BEFORE_CUSTOMER_EXPOSURE=YES`).
 
 The canonical Medusa config registers the module only when
 `PAYPAL_PROVIDER_ENABLED=true`. With the safe default `false`, missing

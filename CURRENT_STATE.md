@@ -6,7 +6,7 @@
 | Mother Template | Frozen: `CrossBorder-Independent-Store/03_template/medusa-crossborder-base/` |
 | Figma | Frozen source of truth |
 | Web UI | Frozen; Homepage, PDP, Collection/Search, Cart, Mini Cart and Checkout implemented |
-| Review status | Review-03 closed; Full Review Checkpoint 001 verified pass/closed |
+| Review status | Review-03 closed; Full Review Checkpoint 001 verified pass/closed; Full Review Checkpoint 002 active |
 | Settlement | WorldFirst Collection Account only |
 | Checkout candidate | PayPal readiness-only; disabled and not customer-visible |
 
@@ -33,3 +33,9 @@ The project remains in `PAYMENT_INTEGRATION`. The next phase is
 `PAYPAL_ACCOUNT_SANDBOX_CAPABILITY`, followed by
 `PAYPAL_SANDBOX_TRANSPORT_INTEGRATION`. Product/content, logistics/tax and
 other production-readiness work remain later phases.
+
+- `FULL_REVIEW_CHECKPOINT_002=ACTIVE`
+- `ROUND_1_FINDINGS=CLOSED`
+- `ROUND_2_FINDINGS=CLOSING`
+- `CURRENT_STAGE=PAYMENT_INTEGRATION`
+- `NEXT_PHASE=PAYPAL_ACCOUNT_SANDBOX_CAPABILITY`

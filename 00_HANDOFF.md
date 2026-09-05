@@ -2,10 +2,10 @@
 
 ## 1. CURRENT STATUS
 
-- `TASK=CB-FULL-REVIEW-CHECKPOINT-002-FIX-R1`
+- `TASK=CB-FULL-REVIEW-CHECKPOINT-002-FIX-R2-FINAL`
 - `RESULT=PASS`
 - `CURRENT_STAGE=PAYMENT_INTEGRATION`
-- `NEXT_STEP=UPLOAD_FULL_REVIEW_CHECKPOINT_002_ROUND_2`
+- `NEXT_STEP=UPLOAD_FULL_REVIEW_CHECKPOINT_002_FINAL_ROUND_3`
 - `NEXT_PHASE=PAYPAL_ACCOUNT_SANDBOX_CAPABILITY`
 - `FOLLOWING_PHASE=PAYPAL_SANDBOX_TRANSPORT_INTEGRATION`
 - `DOCUMENT_CENTER=跨境电商`
@@ -14,18 +14,20 @@
 - `SOURCE_CANONICAL=CrossBorder-Independent-Store`
 - `WEB_UI_FREEZE=VERIFIED PASS`
 - `REVIEW_03=CLOSED`; `FULL_REVIEW_CHECKPOINT_001=CLOSED`
-- `ROOT_HEAD=72840e82639cde4886fd2ca8014ac377d0ffc1e4`
+- `ROOT_HEAD=4a8bfe74dc4cc1c0ffedf72844141f5fe45c0d63`
 - `HEAD_BEFORE_MOVE=1d47cd3daed9e06ec879db6365444d0f6c7e5019`; `HEAD_AFTER_MOVE` unchanged before the checkpoint
 - `ROOT_STATUS=CLEAN`; `MEDUSA_STATUS=CLEAN`; `SPREE_STATUS=CLEAN`
 - `RUNTIME_REGRESSION=PASS`; Docker Linux engine recovered non-destructively.
 - `DATABASE_LIVE_READBACK=PASS`; PostgreSQL read-only verification completed.
 - `SAFE_WORKSPACE_CLEANUP=PASS`; generated build/runtime outputs removed after
   exact safety checks; active `node_modules` retained.
-- `FULL_REVIEW_CHECKPOINT_002=ACTIVE; ROUND_1_FINDINGS_CLOSED`
+- `FULL_REVIEW_CHECKPOINT_002=ACTIVE; ROUND_1_FINDINGS_CLOSED; ROUND_2_FINDINGS_CLOSING`
 - `PACKAGE_LAYOUT=LIVE_WORKSPACE_SHAPE`; source is copied once under the
   `CrossBorder-Independent-Store/` child in the Reviewer package.
-- `PAYPAL_RUNTIME_CODE_CHANGED=NO`; `PRODUCT_BEHAVIOR_CHANGED=NO`;
+- `PAYPAL_RUNTIME_CODE_CHANGED=SCOPED_CONTRACT_FIX_ONLY`; `PRODUCT_BEHAVIOR_CHANGED=NO`;
   `UI_BEHAVIOR_CHANGED=NO`.
+- `REVIEW_PACKAGE=_review_outbox/CrossBorder-Independent-Store-FULL-REVIEW-CHECKPOINT-002-FINAL-ROUND-3.zip`;
+  package layout is live-workspace-shaped and source is copied once.
 
 ## 2. FINAL ARCHITECTURE
 
@@ -93,6 +95,10 @@ mutating and creates technical test orders; it is not a read-only regression.
 - `CSS_DEBT=P2_DEFERRED_TO_SEPARATE_MAINTENANCE_PASS`.
 - Payment eligibility, sandbox proof and operational go-live gates remain
   pending; no credentials are committed.
+- Round-2 closure: PayPal request IDs are bounded deterministic ASCII values;
+  Orders PATCH has a local operation identity and does not claim
+  `PayPal-Request-Id` support; webhook headers/raw body/parsed data are kept
+  available to the verifier. PayPal remains disabled.
 
 ## 8. NEXT PHASE
 

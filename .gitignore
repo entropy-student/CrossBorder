@@ -5,6 +5,7 @@ CrossBorder-Independent-Store/
 *.zip
 *_STAGING*/
 _review_stage/
+_review_outbox/
 FULL-REVIEW-CHECKPOINT-002*/
 
 # Never track runtime, environment or credential material at the document center.

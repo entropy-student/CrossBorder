@@ -17,7 +17,10 @@ All tests below require verified merchant/sandbox access before execution.
 | Failure + retry | No duplicate provider transaction/order | NOT_EXECUTED |
 | Cancel / return cancel | Cart remains unpaid and retryable | LOCAL_CONTRACT_PASS — cancel/void transport contract only |
 | Duplicate submit | One provider transaction and one order maximum | NOT_EXTERNALLY_PROVEN — local key contract only |
+| PayPal request ID boundary | Deterministic, operation-specific ASCII key <=38 chars | LOCAL_CONTRACT_PASS — bounded hash tests only |
+| Orders PATCH update identity | Same retry stable; distinct normalized update distinct | LOCAL_CONTRACT_PASS — local operation identity; no PayPal header |
 | Webhook verification | Invalid signature rejected | LOCAL_CONTRACT_PASS — fail-closed verification gate |
+| Webhook payload seam | Headers, raw body and parsed event reach verifier | LOCAL_CONTRACT_PASS — local contract test only |
 | Webhook replay | Duplicate event is harmless | NOT_EXTERNALLY_PROVEN / SANDBOX_REQUIRED |
 | Amount mismatch | Finalization blocked | LOCAL_CONTRACT_PASS — injected transport only |
 | Currency mismatch | Finalization blocked | LOCAL_CONTRACT_PASS — injected transport only |

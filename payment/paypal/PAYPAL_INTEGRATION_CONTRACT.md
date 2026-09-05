@@ -45,6 +45,17 @@ official PayPal Orders/Payments API flow documented by Medusa; the official
 server SDK is intentionally not installed during this no-network,
 no-credential scaffold phase.
 
+For PayPal Orders v2 `PATCH`, the official operation returns `204` and the
+current endpoint contract does not define `PayPal-Request-Id` as a PATCH
+header. The scaffold therefore does not send that header for `updateOrder`.
+It derives a bounded local `operation_id` from the opaque Medusa session,
+normalized amount/currency and the Medusa update idempotency context when
+present. The same update retry is stable and a distinct amount/currency or
+operation context is distinct; this identity is local correlation, not a
+claim that PayPal PATCH supports request-id idempotency. See the official
+[Orders v2 update endpoint](https://developer.paypal.com/api/orders/v2/orders-patch/)
+and [REST idempotency guidance](https://developer.paypal.com/api/rest/reference/idempotency/).
+
 No operation may return a success state without a verified PayPal response.
 The adapter must fail closed on missing configuration, unknown provider states,
 invalid signatures, amount mismatch or currency mismatch.
@@ -58,6 +69,8 @@ invalid signatures, amount mismatch or currency mismatch.
   collection/session/order IDs and PayPal order/payment/capture/refund IDs.
 - WorldFirst settlement is a separate downstream receiving/FX operation and
   must not create a second order or replace Medusa order ownership.
+- Preserve `payload.headers`, `payload.rawData` and `payload.data` through the
+  verification seam; do not log or persist transmission/header secrets.
 
 Before capture or order finalization, compare the PayPal amount and currency
 with the current Medusa cart/order. One provider transaction may create at most
