@@ -2,14 +2,19 @@
 
 The current safe staging utility is
 `CrossBorder-Independent-Store/04_docs/scripts/92-prepare-review-staging.ps1`.
-It creates an external staging folder and never creates a ZIP. It excludes Git,
-dependencies, build output, runtime configuration, credentials, database/Docker
-payloads, caches and old ZIPs.
+It creates the live-shaped review tree and, with `-CreateZip`, the final ZIP. It
+excludes Git, dependencies, build output, runtime configuration, credentials,
+database/Docker payloads, caches and old ZIPs.
 
-Future staging includes the current document-center snapshot under
-`document-center/` without requiring these current human documents to be
-copied back into the source tree. The root handoff in the source tree is only a
-pointer stub.
+The staged root mirrors the live workspace: current document-center files are
+at the package root, while the canonical source is copied once under
+`CrossBorder-Independent-Store/`. There is no sibling `document-center/` or
+`source/` tree and no source duplication. The four approved safe environment
+templates are copied byte-for-byte; runtime `.env` files are excluded.
+
+The utility writes `STAGING_MANIFEST.txt`, runs secret/denylist/absolute-path
+and staged relative-link checks, and writes the external package manifest after
+ZIP creation so the ZIP hash is not circular.
 
 Before reporting candidate Git evidence, the utility resolves
 `git rev-parse --show-toplevel` and compares it with the expected candidate
