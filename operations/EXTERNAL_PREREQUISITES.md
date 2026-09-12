@@ -1,48 +1,43 @@
 # External Prerequisites
 
-This is the current human-facing prerequisite list for the first real product
-and the payment phase. Unknown facts remain `UNKNOWN` or `HOLD`; this document
-does not approve a business policy or production launch.
+This is the current prerequisite list for resuming CrossBorder. Unknown facts remain `UNKNOWN` or `HOLD`; this document does not approve production launch.
 
-## Verified locally
+## Current project facts
 
-- Medusa remains the commerce source of truth.
-- Product `prod_01M1JG54Z6PFY802QV32EJ174D`, SKU `PAW-PHR-001`, handle
-  `pet-hair-remover` and approved price `14.99 USD` remain unchanged.
-- The local storefront and backend build/type/test gates pass for the current
-  working tree.
-- PayPal is a disabled Medusa Payment Module scaffold using
-  `AUTHORIZE` / `PAYPAL_AUTO_CAPTURE=false`.
-- Reviewer evidence from BATCH-02 records sandbox OAuth success. This does not
-  prove merchant eligibility, buyer approval, authorization, capture, refund,
-  webhook or production readiness.
-- WorldFirst is a settlement/collection account only for the current account;
-  a separate customer checkout gateway is required.
+- Medusa + Next.js remain the retained application foundation.
+- Existing custom PayPal/reconciliation work remains disabled/reference-only.
+- Future payment and fulfillment are intended to integrate with another already-running system.
+- That external system has not yet been inspected here.
+- Therefore final order ownership, payment ownership, inventory ownership, shipment/tracking ownership and refund/cancellation responsibility are not yet frozen.
 
-## Business facts still required
+## Required first when work resumes
 
-The following are not inferred from supplier claims or local preview state:
+Perform a read-only external-system intake and establish:
 
-- project-owned inventory or a confirmed supplier-to-customer fulfillment route;
-- complete product/package dimensions and package weight;
-- country of origin, independently supported HS classification and compliance;
-- China-to-individual-US dropship support, price and service method;
-- production shipping rate, carrier/service, transit assumptions and tracking;
-- return address, refund owner, customer-service process and dispute owner;
-- tax treatment, legal policies, domain, transactional email and backup/restore
-  ownership.
+- system/repository/deployment identity;
+- available API, SDK, hosted checkout, plugin or callback surfaces;
+- customer-order source of truth;
+- identifier mapping between systems;
+- payment status/cancel/refund behavior;
+- callback verification and duplicate protection;
+- fulfillment and tracking responsibilities;
+- inventory ownership/synchronization;
+- failure, retry and manual-reconciliation behavior;
+- credential/account boundaries.
 
-## PayPal external gates
+## Business facts still required before production
 
-Before any customer exposure, the project still needs:
+- verified inventory or supply route;
+- complete package dimensions/weight and shipping assumptions;
+- origin/compliance/customs facts where applicable;
+- production shipping/returns/customer-service process;
+- tax and customer-facing policy decisions;
+- domain, communications, deployment, monitoring, backup and restore ownership.
 
-- verified PayPal Business/merchant eligibility and sandbox/live capability;
-- buyer approval and return/cancel flow evidence in sandbox;
-- authorization, capture, decline, retry and duplicate-submit evidence;
-- configured `PAYPAL_WEBHOOK_ID`, server-side verification, persistent receipt
-  and application-level reconciliation for negative events;
-- full/pending/failed/repeated/partial refund tests with Medusa read-back;
-- external CI or equivalent isolated repeatability evidence.
+## Current state
 
-PayPal customer exposure remains disabled. No live endpoint or real money is
-authorized by this prerequisite list.
+`PROJECT_RESUME_GATE=EXTERNAL_PAYMENT_FULFILLMENT_SYSTEM_INTAKE`
+
+`PRODUCTION_READY=NO`
+
+`LIVE_ENABLEMENT=NO`
