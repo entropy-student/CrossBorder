@@ -1,39 +1,38 @@
 # Fulfillment Readiness
 
-## Current factual state
+## Current direction
 
-`SUPPLIER_STOCK_STATUS=AVAILABLE` is a supplier claim. It is not project-owned
-inventory. `PROJECT_OWNED_INVENTORY=UNKNOWN`; production fulfillment is `HOLD`.
-Packaging, complete dimensions, origin, verified HS/compliance, consumer
-dropship support, production shipping route, return address and refund owner
-are not established facts for this product.
+Future fulfillment is intended to integrate with another already-running system rather than be fully implemented inside CrossBorder.
 
-## Minimum operational flow
+The external system has not yet been inspected here, so the following remain `UNKNOWN` until a future intake:
 
-1. Medusa owns the cart, address, shipping choice, totals and order.
-2. PayPal may authorize and capture only after the reviewed sandbox path is
-   enabled; a browser return alone never proves payment.
-3. A fulfillment decision requires verified captured-payment evidence, a valid
-   shipping address, an available/confirmed supply route, a shipping method and
-   an identified refund/customer-service owner.
-4. For low order volume, an operator may manually confirm the item, pick and
-   pack it, purchase/record the approved shipping service, attach tracking and
-   notify the customer.
-5. The operator reconciles the Medusa order, provider transaction/capture,
-   shipment/tracking record and any refund or exception. A missing or pending
-   capture keeps fulfillment on hold.
+- who owns the final fulfillment record;
+- how shipment/tracking is created and updated;
+- whether inventory is owned or synchronized externally;
+- how cancellation, return, reship and refund responsibilities are split;
+- how CrossBorder and the external system recover from duplicate, delayed or failed events.
 
-This is a control sequence, not a production shipping promise. No ERP, PIM,
-new gateway or automatic fulfillment system is introduced here.
+## Current product facts
+
+Supplier availability is not the same as project-owned inventory. Production supply route, packaging, complete dimensions, origin, shipping route, return path and other real fulfillment facts must stay `UNKNOWN/HOLD` until verified.
+
+## Future integration acceptance
+
+Before production, the selected integration must prove:
+
+1. one order cannot create duplicate fulfillment;
+2. failed or repeated callbacks are safe;
+3. tracking updates map to the correct order;
+4. cancellation/refund behavior is consistent across both systems;
+5. inventory ownership and oversell behavior are explicit;
+6. manual recovery exists when automatic synchronization cannot safely decide.
 
 ## Current gates
 
-`CAPTURED_PAYMENT=SANDBOX_REQUIRED`
-
-`FULFILLMENT_ROUTE=UNKNOWN`
+`FULFILLMENT_INTEGRATION=NOT_STARTED`
 
 `PROJECT_OWNED_INVENTORY=UNKNOWN`
 
-`RETURNS_REFUNDS_OWNER=NEEDS_USER_BUSINESS_DECISION`
-
 `AUTO_FULFILLMENT=DISABLED`
+
+`PRODUCTION_FULFILLMENT=HOLD`
