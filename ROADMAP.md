@@ -1,26 +1,29 @@
 # Roadmap
 
-## Completed
+## Completed / retained
 
 - Medusa selected; Mother Template and approved Figma/Web UI frozen.
-- Product Master and sourcing-component contracts established.
-- First user-supplied product integrated into local Medusa preview at USD
-  14.99 with the approved 1:1 source asset.
-- Cart, Checkout Entry and payment-boundary reviews closed through Full Review
-  Checkpoint 001.
+- Product and sourcing contracts established.
+- First product integrated into the local Medusa preview.
+- Cart, checkout boundary, local runtime, Docker and database foundations reviewed with scoped evidence.
+- Repository governance normalized under `VPS Project Governance v0.1.6`.
 
-## Current gate
+## Current state
 
-`FULL_REVIEW_CHECKPOINT_002` — full payment-boundary review and finding
-closure. No runtime or payment behavior is changed by this phase. The project
-remains in `PAYMENT_INTEGRATION`.
+`PAUSED_AFTER_REPOSITORY_CLEANUP`
 
-## Next phase
+No implementation Gate is active.
 
-`PAYPAL_ACCOUNT_SANDBOX_CAPABILITY`
+## Architecture realignment
 
-Then: `PAYPAL_SANDBOX_TRANSPORT_INTEGRATION`.
+Future payment and fulfillment are intended to integrate with another already-running system rather than continue as a fully self-developed CrossBorder subsystem.
 
-Product/content finalization, logistics/tax/fulfillment, customer policies,
-deployment/security and operational go-live gates remain later
-production-readiness work. PayPal Sandbox is not started by this cleanup.
+The existing custom PayPal/reconciliation implementation is preserved as reference and remains disabled by default. It is not the selected production direction.
+
+## Next phase when work resumes
+
+`EXTERNAL_PAYMENT_FULFILLMENT_SYSTEM_INTAKE`
+
+First inspect the existing system and define the minimal integration boundary. Do not implement an adapter until source-of-truth, order ownership, callbacks, retry/idempotency, refund/cancel behavior, fulfillment/tracking and inventory responsibilities are known.
+
+Production deployment, real inventory/logistics, customer policies and go-live verification remain later work.
