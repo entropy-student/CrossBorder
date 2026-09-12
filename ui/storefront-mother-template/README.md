@@ -26,9 +26,9 @@ Do not add Medusa SDK calls, payment calls, fulfillment calls, database calls, a
 ## Initial routes
 
 - `/` — generic home shell
-- `/product` — PDP golden-page shell
+- `/golden` — PDP-style golden visual shell
 
-Collection, cart and checkout shells are added only after the visual language is accepted on the golden PDP.
+Collection, cart and checkout shells are added only after the visual language is accepted on the golden page.
 
 ## Run
 
@@ -43,7 +43,7 @@ Default port: `8100`.
 
 1. Supply approved reference images.
 2. Run one high-leverage GPT-6 design pass using `GPT6_VISUAL_BRIEF.md`.
-3. Iterate first on `/product` as the golden page.
+3. Iterate first on `/golden`.
 4. Capture desktop/mobile screenshots and apply `VISUAL_GATE.md`.
 5. Freeze tokens/components.
 6. Expand the accepted visual system to remaining page shells.
