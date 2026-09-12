@@ -4,7 +4,7 @@ Current Reviewer truth is maintained in `entropy-student/CrossBorder-Reviewer/RE
 
 ## Active project documents
 
-- `review-source/03_template/medusa-crossborder-base/`
+- `README.md`
 - `ROADMAP.md`
 - `PRODUCTION_READINESS.md`
 - `operations/`
@@ -13,4 +13,10 @@ Current Reviewer truth is maintained in `entropy-student/CrossBorder-Reviewer/RE
 - `ui/`
 - `deployment/`
 
-Historical review and validation material is preserved in Git history and the Reviewer repository, not in the active source root.
+## Application snapshot
+
+`review-source/03_template/medusa-crossborder-base/` is the retained application snapshot.
+
+Other status/handoff/docs inside `review-source/` are snapshot-local historical material. They do not override the root project documents or the canonical Reviewer handoff.
+
+Historical review and validation material outside the retained snapshot has been removed from the active source tree and remains recoverable through Git history and the Reviewer repository.
