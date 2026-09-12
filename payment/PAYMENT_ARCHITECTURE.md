@@ -2,35 +2,29 @@
 
 ## Current decision
 
-- `SETTLEMENT_PROVIDER=WORLDFIRST`
-- `WORLDFIRST_MODE=WORLDFIRST_COLLECTION_ACCOUNT`
-- `WORLDFIRST_GLOBAL_CHECKOUT=NOT_AVAILABLE_CURRENT_ACCOUNT / DEFERRED`
-- `CHECKOUT_GATEWAY_REQUIRED=YES`
-- `PRIMARY_CHECKOUT_CANDIDATE=PAYPAL`
-- `PAYPAL_PAYMENT_INTENT=AUTHORIZE`
-- `PAYPAL_AUTO_CAPTURE=false`
-- `PAYPAL_PROVIDER_ENABLED=NO`
-- `PAYPAL_CUSTOMER_EXPOSURE=DISABLED`
-- `SYSTEM_PAYMENT=TECHNICAL_TEST_ONLY`
+The project will not continue treating the in-repo PayPal implementation as the default production direction.
 
-WorldFirst receives settlement from a future checkout gateway; it is not the
-customer-facing acquiring provider. PayPal remains a candidate only and must
-stay behind the Medusa Payment Module boundary.
+Future payment and fulfillment are intended to integrate with another already-running system. The external system has not yet been inspected in this project, so its API surface, order ownership, callback model and transaction lifecycle are `UNKNOWN`.
 
-## Runtime authority and safety
+## Existing code
 
-`Medusa Payment Module / AbstractPaymentProvider` is the runtime payment
-contract. The provider-neutral file in the canonical source is readiness/
-reference material only, not a second order orchestration system.
+The Medusa PayPal provider/reconciliation implementation remains in the source tree as a disabled historical/reference implementation. It may inform future adapter work, but it must not be enabled or extended merely because it exists.
 
-Medusa owns cart, totals, shipping choice, order and customer history. A future
-provider adapter owns only external transaction state, verified callbacks,
-idempotency and safe operation mapping. No provider API was called and no real
-money was charged in the closed review checkpoint.
+## Future integration boundary
 
-The installed Medusa 2.19.0 negative webhook behavior is
-`MEDUSA_NEGATIVE_WEBHOOK_ACTIONS=IGNORED_BY_CORE`; application-level
-reconciliation is required before customer exposure.
+Before implementation, a read-only intake must determine:
 
-See [PayPal](PAYPAL.md), [WorldFirst](WORLDFIRST.md) and the
-[canonical payment contract](PAYMENT_INTEGRATION_CONTRACT.md).
+- whether the external system exposes API, SDK, hosted checkout, plugin or callback interfaces;
+- which system owns the final customer order;
+- transaction create/status/cancel/refund semantics;
+- callback verification and duplicate protection;
+- stable identifier mapping;
+- fulfillment/tracking ownership;
+- inventory synchronization responsibility;
+- retry/recovery behavior.
+
+Only after those facts are known should the project decide whether the correct boundary is a Medusa provider adapter, redirect adapter, order handoff, fulfillment connector, or another minimal integration.
+
+## Safety
+
+Customer payment exposure remains disabled by default. Existing provider-specific documentation is historical/reference material unless a later Reviewer decision explicitly reactivates it.
