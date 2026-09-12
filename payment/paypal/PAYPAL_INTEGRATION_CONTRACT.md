@@ -136,6 +136,11 @@ evidence. PayPal refund completion is asynchronous in the external contract:
 `COMPLETED`, `PENDING` and `FAILED` outcomes, repeated logical refunds,
 distinct partial refunds and provider/Medusa read-back all remain
 `SANDBOX_REQUIRED`; local transport tests do not prove real refund completion.
+The current scaffold carries operation evidence in returned provider data for
+local contract testing, not as a durable concurrent-refund ledger. Until a
+reviewed Medusa persistence/reconciliation path and sandbox evidence exist,
+concurrent or ambiguous refunds remain `HOLD` for manual provider/Medusa
+reconciliation; the adapter must not invent a second accounting store.
 
 ## Current gate
 
